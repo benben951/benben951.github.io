@@ -415,6 +415,17 @@ figcaption {
   border: 1px solid rgba(24, 33, 31, 0.1);
 }
 
+.gallery .phone-preview {
+  max-width: 380px;
+  justify-self: center;
+}
+
+.gallery .phone-preview img {
+  height: 520px;
+  object-fit: cover;
+  object-position: top center;
+}
+
 .path-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -587,6 +598,15 @@ figcaption {
 
   .timeline-item {
     grid-template-columns: 1fr;
+  }
+
+  .gallery .phone-preview {
+    max-width: 100%;
+    justify-self: stretch;
+  }
+
+  .gallery .phone-preview img {
+    height: 420px;
   }
 }
 
