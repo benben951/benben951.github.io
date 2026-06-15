@@ -136,21 +136,34 @@
 
       <section id="visual-proof">
         <div class="section-title">
-          <h2>Visual Proof</h2>
+          <h2>Gallery</h2>
           <p>
-            Screenshots matter. They make the projects feel usable before a reviewer opens the
-            code.
+            A few frames from the actual review console: desktop view, review flow, and mobile
+            layout.
           </p>
         </div>
-        <div class="gallery">
-          <figure>
-            <img src="./assets/demo_review_flow.gif" alt="Agent Trust Lab review flow animation" />
-            <figcaption>Review flow: select case, inspect findings, route to human review.</figcaption>
-          </figure>
-          <figure class="phone-preview">
-            <img src="./assets/demo_mobile_overview.png" alt="Agent Trust Lab mobile overview" />
-            <figcaption>Responsive layout for quick review on narrow screens.</figcaption>
-          </figure>
+        <div class="gallery-carousel" data-carousel>
+          <button class="gallery-button prev" type="button" data-carousel-prev aria-label="Previous screenshot">Prev</button>
+          <div class="gallery-frame">
+            <figure class="gallery-slide active" data-carousel-slide>
+              <img src="./assets/agent-trust-lab-v05.png" alt="Agent Trust Lab desktop review console" />
+              <figcaption>Desktop review console: evidence, findings, score, and route in one screen.</figcaption>
+            </figure>
+            <figure class="gallery-slide" data-carousel-slide>
+              <img src="./assets/demo_review_flow.gif" alt="Agent Trust Lab review flow animation" />
+              <figcaption>Review flow: select case, inspect findings, route to human review.</figcaption>
+            </figure>
+            <figure class="gallery-slide" data-carousel-slide>
+              <img src="./assets/demo_mobile_overview.png" alt="Agent Trust Lab mobile overview" />
+              <figcaption>Mobile layout: the same review workflow in a narrow screen.</figcaption>
+            </figure>
+          </div>
+          <button class="gallery-button next" type="button" data-carousel-next aria-label="Next screenshot">Next</button>
+          <div class="gallery-dots" aria-label="Gallery slide selector">
+            <button class="active" type="button" data-carousel-dot aria-label="Show desktop screenshot"></button>
+            <button type="button" data-carousel-dot aria-label="Show review flow animation"></button>
+            <button type="button" data-carousel-dot aria-label="Show mobile screenshot"></button>
+          </div>
         </div>
       </section>
 
@@ -330,5 +343,23 @@
         </p>
       </footer>
     </main>
+    <script>
+      const carousel = document.querySelector("[data-carousel]");
+      if (carousel) {
+        const slides = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
+        const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
+        let current = 0;
+
+        const showSlide = (next) => {
+          current = (next + slides.length) % slides.length;
+          slides.forEach((slide, index) => slide.classList.toggle("active", index === current));
+          dots.forEach((dot, index) => dot.classList.toggle("active", index === current));
+        };
+
+        carousel.querySelector("[data-carousel-prev]").addEventListener("click", () => showSlide(current - 1));
+        carousel.querySelector("[data-carousel-next]").addEventListener("click", () => showSlide(current + 1));
+        dots.forEach((dot, index) => dot.addEventListener("click", () => showSlide(index)));
+      }
+    </script>
   </body>
 </html>

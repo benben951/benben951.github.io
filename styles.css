@@ -359,10 +359,9 @@ h2 {
 }
 
 .exhibit-media img,
-.gallery img {
+.gallery-slide img {
   display: block;
   width: 100%;
-  height: auto;
   border-radius: 22px;
   border: 1px solid rgba(24, 33, 31, 0.12);
   box-shadow: 0 20px 46px rgba(43, 32, 15, 0.16);
@@ -400,30 +399,100 @@ figcaption {
   text-decoration: none;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: 16px;
-  align-items: start;
-}
-
-.gallery figure {
-  margin: 0;
-  padding: 14px;
-  border-radius: 26px;
-  background: rgba(255, 252, 244, 0.62);
+.gallery-carousel {
+  position: relative;
+  padding: 18px;
   border: 1px solid rgba(24, 33, 31, 0.1);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 252, 244, 0.86), rgba(247, 240, 223, 0.7)),
+    var(--card);
+  box-shadow: var(--shadow);
 }
 
-.gallery .phone-preview {
-  max-width: 380px;
-  justify-self: center;
+.gallery-frame {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(24, 33, 31, 0.06);
 }
 
-.gallery .phone-preview img {
-  height: 520px;
+.gallery-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px) scale(0.985);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+
+.gallery-slide img {
+  height: 462px;
   object-fit: cover;
   object-position: top center;
+}
+
+.gallery-slide figcaption {
+  padding: 0 6px;
+}
+
+.gallery-button {
+  position: absolute;
+  top: 42%;
+  z-index: 2;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(24, 33, 31, 0.16);
+  border-radius: 50%;
+  color: #fff8ea;
+  background: rgba(20, 92, 75, 0.92);
+  box-shadow: 0 12px 28px rgba(24, 33, 31, 0.18);
+  cursor: pointer;
+  font-family: "Segoe UI", "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.gallery-button.prev {
+  left: -10px;
+}
+
+.gallery-button.next {
+  right: -10px;
+}
+
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.gallery-dots button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 92, 75, 0.25);
+  cursor: pointer;
+}
+
+.gallery-dots button.active {
+  width: 30px;
+  border-radius: 999px;
+  background: var(--accent);
 }
 
 .path-grid {
@@ -580,7 +649,6 @@ figcaption {
   .grid,
   .hero-exhibit,
   .exhibit-grid,
-  .gallery,
   .path-grid,
   .dashboard-layout {
     grid-template-columns: 1fr;
@@ -600,13 +668,17 @@ figcaption {
     grid-template-columns: 1fr;
   }
 
-  .gallery .phone-preview {
-    max-width: 100%;
-    justify-self: stretch;
+  .gallery-frame {
+    min-height: 430px;
   }
 
-  .gallery .phone-preview img {
-    height: 420px;
+  .gallery-slide img {
+    height: 372px;
+  }
+
+  .gallery-button {
+    top: auto;
+    bottom: 48px;
   }
 }
 
